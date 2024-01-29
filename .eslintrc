@@ -6,15 +6,14 @@
     "babelOptions": {
     }
   },
+  "plugins": [
+    "@typescript-eslint"
+  ],
   "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
     "operator-linebreak": ["off"],
-    "react/jsx-first-prop-new-line": ["off"],
-    "react/jsx-indent-props": "off",
-    "react/jsx-closing-tag-location": ["off"],
-    "react/jsx-closing-bracket-location": ["off"],
-    "react/jsx-curly-newline": ["off"],
-    "react/jsx-boolean-value": ["off"],
-    "jsx-quotes": ["error", "prefer-double"],
+    "dot-notation": ["off"],
     "multiline-ternary": "off",
     "no-multiple-empty-lines": [
       "error",
