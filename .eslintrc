@@ -1,0 +1,34 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "ignorePatterns": ["lib.es5.d.ts"],
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+    }
+  },
+  "rules": {
+    "operator-linebreak": ["off"],
+    "react/jsx-first-prop-new-line": ["off"],
+    "react/jsx-indent-props": "off",
+    "react/jsx-closing-tag-location": ["off"],
+    "react/jsx-closing-bracket-location": ["off"],
+    "react/jsx-curly-newline": ["off"],
+    "react/jsx-boolean-value": ["off"],
+    "jsx-quotes": ["error", "prefer-double"],
+    "multiline-ternary": "off",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "no-undef": "off",
+    "indent": ["error", 4, {
+      "SwitchCase": 1,
+      "ignoredNodes": ["TemplateLiteral *"]
+    }],
+    "comma-dangle": "off",
+    "no-multi-spaces": ["error", { "ignoreEOLComments": true }]
+  }
+}
