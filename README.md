@@ -1,5 +1,5 @@
 # ephemeral crypto
-![tests](https://github.com/nichoth/ephemeral-crypto/actions/workflows/nodejs.yml/badge.svg?style=flat-square)
+![tests](https://github.com/nichoth/ephemeral-crypto/actions/workflows/nodejs.yml/badge.svg)
 [![types](https://img.shields.io/npm/types/@nichoth/ephemeral-crypto?style=flat-square)](README.md)
 [![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
@@ -13,7 +13,7 @@ npm i -S @nichoth/ephemeral-crypto
 
 ## API
 
-### encryptMessage
+### `encryptMessage`
 Encrypt the given message object, and return an array of `[ encryptedMessage, { key }]`, where `key` is an AES key, encoded as `base64url`.
 
 ```ts
@@ -35,7 +35,7 @@ console.log(encryptedMessage)
 // =>  { content: '5eAcA6+jnBfbuCx8L...' }
 ```
 
-### decryptMessage
+### `decryptMessage`
 Decrypt the given message with the given key. Suitable for decrypting a message that was encrypted by this library.
 
 ```ts
