@@ -1,4 +1,6 @@
 {
+  "name": "@nichoth/ephemeral-crypto",
+  "description": "In-browser cryptography",
   "private": true,
   "type": "module",
   "version": "0.0.1",
@@ -51,5 +53,25 @@
     }
   },
   "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nichoth/ephemeral-crypto.git"
+  },
+  "keywords": [
+    "cryptography",
+    "encrypt",
+    "decrypt",
+    "crypto",
+    "browser"
+  ],
+  "bugs": {
+    "url": "https://github.com/nichoth/ephemeral-crypto/issues"
+  },
+  "homepage": "https://github.com/nichoth/ephemeral-crypto#readme"
 }
