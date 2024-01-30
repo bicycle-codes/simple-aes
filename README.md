@@ -7,6 +7,8 @@
 
 Cryptography used by [ephemeral.page](https://ephemeral.page/). Works in browsers and node.
 
+This is generally useful as a dead simple way of using symmetric keys in a browser or node.
+
 ## install
 ```sh
 npm i -S @nichoth/ephemeral-crypto
@@ -15,7 +17,7 @@ npm i -S @nichoth/ephemeral-crypto
 ## API
 
 ### `encryptMessage`
-Encrypt the given message object, and return an array of `[ encryptedMessage, { key }]`, where `key` is an AES key, encoded as `base64url`.
+Encrypt the given message object, and return an array of `[ encryptedMessage, { key }]`, where `key` is a new AES key, encoded as `base64url`.
 
 ```ts
 async function encryptMessage (
@@ -24,7 +26,6 @@ async function encryptMessage (
 ```
 
 #### encrypt example
-
 ```ts
 import { encryptMessage } from '@nichoth/ephemeral-crypto'
 
@@ -37,17 +38,16 @@ console.log(encryptedMessage)
 ```
 
 ### `decryptMessage`
-Decrypt the given message with the given key. Suitable for decrypting a message that was encrypted by this library.
+Decrypt the given message with the given key. Suitable for decrypting a message that was encrypted by this library. Key is an AES key, `base64url` encoded.
 
 ```ts
 async function decryptMessage (
     msg:{ content:string },
-    keyString:string
+    keyString:string  // <-- base64url
 ):Promise<{ content:string }>
 ```
 
 #### decrypt example
-
 ```js
 import { test } from '@nichoth/tapzero'
 import { decryptMessage } from '@nichoth/ephemeral-crypto'
