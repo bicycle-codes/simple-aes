@@ -18,8 +18,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "one-webcrypto": "^1.0.3",
-    "uint8arrays": "^5.0.1"
+    "@bicycle-codes/one-webcrypto": "^1.0.3",
+    "@bicycle-codes/uint8arrays": "^5.0.3"
   },
   "devDependencies": {
     "@nichoth/debug": "^0.5.0",
