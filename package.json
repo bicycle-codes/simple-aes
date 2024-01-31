@@ -1,5 +1,5 @@
 {
-  "name": "@nichoth/ephemeral-crypto",
+  "name": "@bicycle-codes/ephemeral-crypto",
   "description": "In-browser cryptography",
   "private": true,
   "type": "module",
