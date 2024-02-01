@@ -53,7 +53,7 @@
     }
   },
   "author": "nichoth <nichoth@gmail.com> (https://nichoth.com)",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "types": "./dist/index.d.ts",
   "directories": {
     "example": "example",
