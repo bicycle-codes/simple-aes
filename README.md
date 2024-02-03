@@ -62,6 +62,6 @@ test('decrypt the message', async t => {
 })
 ```
 
-> !NOTE
+> [!NOTE]  
 > This uses forks of `one-webcrypto` and `uint8arrays` so that we own
 > the entire dependency graph.
