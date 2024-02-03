@@ -1,7 +1,6 @@
 {
   "name": "@bicycle-codes/ephemeral-crypto",
   "description": "In-browser cryptography",
-  "private": true,
   "type": "module",
   "version": "0.0.3",
   "main": "dist/index.js",
@@ -14,7 +13,7 @@
     "start": "vite",
     "preversion": "npm run lint",
     "version": "auto-changelog -p --template keepachangelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md",
-    "postversion": "git push --follow-tags",
+    "postversion": "git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
