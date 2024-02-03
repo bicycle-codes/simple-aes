@@ -14,7 +14,7 @@ Thanks to [Fission](https://github.com/fission-codes/), the original author for 
 
 ## install
 ```sh
-npm i -S @nichoth/ephemeral-crypto
+npm i -S @bicycle-codes/ephemeral-crypto
 ```
 
 ## API
@@ -30,7 +30,7 @@ async function encryptMessage (
 
 #### encrypt example
 ```ts
-import { encryptMessage } from '@nichoth/ephemeral-crypto'
+import { encryptMessage } from '@bicycle-codes/ephemeral-crypto'
 
 const [encryptedMsg, { key }] = await encryptMessage({
     content: 'hello world'
@@ -53,7 +53,7 @@ async function decryptMessage (
 #### decrypt example
 ```js
 import { test } from '@nichoth/tapzero'
-import { decryptMessage } from '@nichoth/ephemeral-crypto'
+import { decryptMessage } from '@bicycle-codes/ephemeral-crypto'
 
 test('decrypt the message', async t => {
     const decrypted = await decryptMessage(message, key)

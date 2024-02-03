@@ -35,6 +35,9 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.12"
   },
+  "files": [
+    "./dist/*"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
