@@ -6,7 +6,7 @@
 [![license](https://nichoth.github.io/badge/polyform-shield.svg)](LICENSE)
 
 
-Cryptography used by [ephemeral.page](https://ephemeral.page/). Works in browsers and node.
+Cryptography used by [vanishing.page](https://vanishing.page/). Works in browsers and node.
 
 This is generally useful as a dead simple way of using symmetric keys in a browser or node.
 
