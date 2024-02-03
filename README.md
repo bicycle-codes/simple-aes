@@ -1,8 +1,8 @@
-# ephemeral crypto
-![tests](https://github.com/nichoth/ephemeral-crypto/actions/workflows/nodejs.yml/badge.svg)
+# simple AES
+![tests](https://github.com/nichoth/simple-aes/actions/workflows/nodejs.yml/badge.svg)
 [![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-brightgreen?logo=semver&style=flat-square)](https://semver.org/)
-[![license](https://nichoth.github.io/badge/polyform-shield.svg)](LICENSE)
+[![license](https://nichoth.github.io/badge/license-polyform-shield.svg)](LICENSE)
 
 
 Cryptography used by [vanishing.page](https://vanishing.page/). Works in browsers and node.
@@ -13,7 +13,7 @@ Thanks to [Fission](https://github.com/fission-codes/), the original author for 
 
 ## install
 ```sh
-npm i -S @bicycle-codes/ephemeral-crypto
+npm i -S @bicycle-codes/simple-aes
 ```
 
 ## API
@@ -29,7 +29,7 @@ async function encryptMessage (
 
 #### encrypt example
 ```ts
-import { encryptMessage } from '@bicycle-codes/ephemeral-crypto'
+import { encryptMessage } from '@bicycle-codes/simple-aes'
 
 const [encryptedMsg, { key }] = await encryptMessage({
     content: 'hello world'
@@ -52,7 +52,7 @@ async function decryptMessage (
 #### decrypt example
 ```js
 import { test } from '@nichoth/tapzero'
-import { decryptMessage } from '@bicycle-codes/ephemeral-crypto'
+import { decryptMessage } from '@bicycle-codes/simple-aes'
 
 test('decrypt the message', async t => {
     const decrypted = await decryptMessage(message, key)

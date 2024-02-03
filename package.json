@@ -1,6 +1,6 @@
 {
-  "name": "@bicycle-codes/ephemeral-crypto",
-  "description": "In-browser cryptography",
+  "name": "@bicycle-codes/simple-aes",
+  "description": "In-browser symmetric keys",
   "type": "module",
   "version": "0.0.5",
   "main": "dist/index.js",
@@ -58,22 +58,23 @@
   "license": "SEE LICENSE IN LICENSE",
   "types": "./dist/index.d.ts",
   "directories": {
-    "example": "example",
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nichoth/ephemeral-crypto.git"
+    "url": "git+https://github.com/bicycle-codes/simple-aes.git"
   },
   "keywords": [
     "cryptography",
     "encrypt",
     "decrypt",
     "crypto",
-    "browser"
+    "browser",
+    "symmetric",
+    "AES"
   ],
   "bugs": {
-    "url": "https://github.com/nichoth/ephemeral-crypto/issues"
+    "url": "https://github.com/bicycle-codes/simple-aes/issues"
   },
-  "homepage": "https://github.com/nichoth/ephemeral-crypto#readme"
+  "homepage": "https://github.com/bicycle-codes/simple-aes#readme"
 }
