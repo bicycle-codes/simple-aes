@@ -1,6 +1,6 @@
 {
   "name": "@bicycle-codes/simple-aes",
-  "description": "In-browser symmetric keys",
+  "description": "An easy way to use symmetric keys in browsers or node",
   "type": "module",
   "version": "0.0.8",
   "main": "dist/index.js",
