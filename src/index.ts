@@ -1,5 +1,5 @@
-import { webcrypto } from '@bicycle-codes/one-webcrypto'
-import { fromString, toString } from '@bicycle-codes/uint8arrays'
+import { webcrypto } from 'one-webcrypto'
+import { fromString, toString } from 'uint8arrays'
 
 export enum SymmAlg {
     AES_CTR = 'AES-CTR',
