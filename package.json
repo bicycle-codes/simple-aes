@@ -21,7 +21,7 @@
     "uint8arrays": "^5.0.2"
   },
   "devDependencies": {
-    "@nichoth/debug": "^0.5.0",
+    "@nichoth/debug": "^0.6.1",
     "@nichoth/tapzero": "^0.8.4",
     "@preact/preset-vite": "^2.8.1",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
