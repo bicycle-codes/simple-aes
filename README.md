@@ -8,7 +8,7 @@
 
 Cryptography used by [vanishing.page](https://vanishing.page/). Works in browsers and node.
 
-This is generally useful as a dead simple way of using symmetric keys in a browser or node.
+This is generally useful as a dead simple way of working with symmetric keys in a browser or node.
 
 Thanks to [Fission](https://github.com/fission-codes/), the original author for much of this code.
 
