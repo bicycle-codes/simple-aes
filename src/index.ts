@@ -13,6 +13,12 @@ const CONTENT_ENCODING = 'base64pad'
 const KEY_ENCODING = 'base64url'
 const DEFAULT_SYMM_ALG = SymmAlg.AES_GCM
 
+/**
+ * Export a given AES key, returning a string encoded as `base64url`.
+ *
+ * @param {CryptoKey} key The key to export.
+ * @returns {string} The key, encoded as `base64url`
+ */
 async function exportKey (key:CryptoKey):Promise<string> {
     const buffer = await webcrypto.subtle.exportKey('raw', key)
     const arr = new Uint8Array(buffer)
