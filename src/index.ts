@@ -177,6 +177,7 @@ function randomBuf (length: number, { max }: { max: number } = { max: 255 }): Ar
 
 /**
  * Take a `base64url` encoded key, return a CryptoKey.
+ *
  * @param base64key Key encoded as a string.
  * @param opts Algorithm, length, IV (don't need to use this)
  * @returns {Promise<CryptoKey>} The CryptoKey
