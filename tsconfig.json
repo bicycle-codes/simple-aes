@@ -17,15 +17,12 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact",
     "noImplicitAny": false,
     "declaration": true,
     "declarationDir": "dist",
     "declarationMap": true
   },
   "include": [
-    "example",
     "src/**/*",
     "test",
     "lib.es5.d.ts"

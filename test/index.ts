@@ -1,4 +1,4 @@
-import { test } from '@nichoth/tapzero'
+import { test } from '@bicycle-codes/tapzero'
 import { decryptMessage, encryptMessage, Message } from '../src/index.js'
 
 let message:Message
@@ -10,7 +10,6 @@ test('Encrypt a message', async t => {
     message = encryptedMsg
     theKey = key
 
-    console.log('**encrypted**', encryptedMsg)
     t.ok(key, 'should return a key')
     t.equal(typeof encryptedMsg.content, 'string',
         'should return an encrypted message')
