@@ -52,7 +52,7 @@ async function decryptMessage (
 
 #### decrypt example
 ```js
-import { test } from '@nichoth/tapzero'
+import { test } from '@bicycle-codes/tapzero'
 import { decryptMessage } from '@bicycle-codes/simple-aes'
 
 test('decrypt the message', async t => {
