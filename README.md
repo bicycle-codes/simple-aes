@@ -20,7 +20,9 @@ npm i -S @bicycle-codes/simple-aes
 ## API
 
 ### `encryptMessage`
-Encrypt the given message object, and return an array of `[ encryptedMessage, { key }]`, where `key` is a new AES key, encoded as `base64url`.
+Generate a new AES key and encrypt the given message object.
+Return an array of `[ encryptedMessage, { key }]`,
+where `key` is a new AES key, encoded as `base64url`.
 
 ```ts
 async function encryptMessage (
