@@ -19,6 +19,27 @@ npm i -S @bicycle-codes/simple-aes
 
 ## API
 
+### `@bicycle-codes/simple-aes`
+Use the `webcrypto` API. This will only work in newer browsers.
+
+```js
+import {
+    decryptMessage,
+    encryptMessage,
+    type Message
+} from '@bicycle-codes/simple-aes'
+```
+
+### `@bicycle-codes/simple-aes/old`
+Use a user-land module, `@noble/ciphers`. This will work in browsers of all ages.
+
+```js
+import {
+    encryptMessage,
+    decryptMessage
+} from '@bicycle-codes/simple-aes/old'
+```
+
 ### `encryptMessage`
 Generate a new AES key and encrypt the given message object.
 Return an array of `[ encryptedMessage, { key }]`,

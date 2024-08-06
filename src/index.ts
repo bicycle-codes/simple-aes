@@ -1,17 +1,17 @@
 import { webcrypto } from 'one-webcrypto'
-import { fromString, toString } from 'uint8arrays'
-
-export enum SymmAlg {
-    AES_CTR = 'AES-CTR',
-    AES_CBC = 'AES-CBC',
-    AES_GCM = 'AES-GCM',
-}
-
-export type Message = { content:string }
-
-const CONTENT_ENCODING = 'base64pad'
-const KEY_ENCODING = 'base64url'
-const DEFAULT_SYMM_ALG = SymmAlg.AES_GCM
+import { fromString, SupportedEncodings, toString } from 'uint8arrays'
+import {
+    CONTENT_ENCODING,
+    KEY_ENCODING,
+    DEFAULT_SYMM_ALG
+} from './CONSTANTS.js'
+import {
+    normalizeToBuf,
+    normalizeUtf16ToBuf,
+    base64ToArrBuf
+} from './util.js'
+import { Msg, SymmAlg } from './types.js'
+export type { Message } from './types.js'
 
 /**
  * Export a given AES key, returning a string encoded as `base64url`.
@@ -45,7 +45,11 @@ export async function encryptMessage (
     msg:{ content:string }
 ):Promise<[{ content:string }, { key }]> {
     const newKey = await createKey()
-    const encryptedContent = await aesEncrypt(msg.content, newKey, DEFAULT_SYMM_ALG)
+    const encryptedContent = await aesEncrypt(
+        msg.content,
+        newKey,
+        SymmAlg.AES_GCM
+    )
     const encryptedString = toString(encryptedContent, CONTENT_ENCODING)
     const keyAsString = await exportKey(newKey)
 
@@ -91,7 +95,6 @@ function createKey (opts?:Partial<SymmKeyOpts>):Promise<CryptoKey> {
     )
 }
 
-type Msg = ArrayBuffer | string | Uint8Array
 type CipherText = ArrayBuffer
 const DEFAULT_CTR_LEN = 64
 
@@ -122,11 +125,6 @@ async function encryptBytes (
     return joinBufs(iv, cipherBuf)
 }
 
-enum CharSize {
-    B8 = 8,
-    B16 = 16,
-}
-
 function joinBufs (fst:ArrayBuffer, snd:ArrayBuffer):ArrayBuffer {
     const view1 = new Uint8Array(fst)
     const view2 = new Uint8Array(snd)
@@ -134,15 +132,6 @@ function joinBufs (fst:ArrayBuffer, snd:ArrayBuffer):ArrayBuffer {
     joined.set(view1)
     joined.set(view2, view1.length)
     return joined.buffer
-}
-
-function strToArrBuf (str:string, charSize:CharSize):ArrayBuffer {
-    const view =
-      charSize === 8 ? new Uint8Array(str.length) : new Uint16Array(str.length)
-    for (let i = 0, strLen = str.length; i < strLen; i++) {
-        view[i] = str.charCodeAt(i)
-    }
-    return view.buffer
 }
 
 const InvalidMaxValue = new Error('Max must be less than 256 and greater than 0')
@@ -186,7 +175,7 @@ function importKey (
     base64key:string,
     opts?:Partial<SymmKeyOpts>
 ):Promise<CryptoKey> {
-    const buf = base64ToArrBuf(base64key)
+    const buf = base64ToArrBuf('base64url', base64key)
 
     return webcrypto.subtle.importKey(
         'raw',
@@ -214,15 +203,15 @@ export async function decryptMessage (
 ):Promise<{ content:string }> {
     const key = await importKey(keyString)
     const msgBuf = fromString(msg.content, CONTENT_ENCODING)
-    const decryptedMsg = await aesDecrypt(msgBuf, key, DEFAULT_SYMM_ALG)
+    const decryptedMsg = await aesDecrypt(msgBuf, key, SymmAlg.AES_GCM)
     return { content: toString(decryptedMsg) }
 }
 
 export async function aesDecrypt (
     encrypted:Uint8Array,
-    cryptoKey: CryptoKey,
-    alg: SymmAlg,
-    iv?: Uint8Array
+    cryptoKey:CryptoKey,
+    alg:SymmAlg,
+    iv?:Uint8Array
 ): Promise<Uint8Array> {
     const decrypted = iv ?
         await webcrypto.subtle.decrypt(
@@ -239,7 +228,7 @@ async function decryptBytes (
     key:CryptoKey,
     opts?:Partial<SymmKeyOpts>
 ):Promise<ArrayBuffer> {
-    const cipherText = normalizeBase64ToBuf(msg)
+    const cipherText = normalizeBase64ToBuf(msg, 'base64pad')
     const importedKey = typeof key === 'string' ? await importKey(key, opts) : key
     const alg = opts?.alg || DEFAULT_SYMM_ALG
     const iv = cipherText.slice(0, 16)
@@ -251,29 +240,10 @@ async function decryptBytes (
         counter: alg === SymmAlg.AES_CTR ? new Uint8Array(iv) : undefined,
         length: alg === SymmAlg.AES_CTR ? DEFAULT_CTR_LEN : undefined,
     }, importedKey, cipherBytes)
+
     return msgBuff
 }
 
-const normalizeUtf16ToBuf = (msg:Msg):ArrayBuffer => {
-    return normalizeToBuf(msg, (str) => strToArrBuf(str, CharSize.B16))
-}
-
-const normalizeToBuf = (msg: Msg, strConv: (str: string) => ArrayBuffer): ArrayBuffer => {
-    if (typeof msg === 'string') {
-        return strConv(msg)
-    } else if (typeof msg === 'object' && msg.byteLength !== undefined) {
-        // this is the best runtime check I could find for ArrayBuffer/Uint8Array
-        const temp = new Uint8Array(msg)
-        return temp.buffer
-    } else {
-        throw new Error('Improper value. Must be a string, ArrayBuffer, Uint8Array')
-    }
-}
-
-function base64ToArrBuf (string:string):ArrayBuffer {
-    return fromString(string, KEY_ENCODING).buffer
-}
-
-function normalizeBase64ToBuf (msg:Msg):ArrayBuffer {
-    return normalizeToBuf(msg, base64ToArrBuf)
+function normalizeBase64ToBuf (msg:Msg, encoding:SupportedEncodings):ArrayBuffer {
+    return normalizeToBuf(msg, base64ToArrBuf.bind(null, encoding))
 }
