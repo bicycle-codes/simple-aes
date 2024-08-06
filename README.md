@@ -30,14 +30,15 @@ import {
 } from '@bicycle-codes/simple-aes'
 ```
 
-### `@bicycle-codes/simple-aes/old`
+### `@bicycle-codes/simple-aes/compat`
+
 Use a user-land module, `@noble/ciphers`. This will work in browsers of all ages.
 
 ```js
 import {
     encryptMessage,
     decryptMessage
-} from '@bicycle-codes/simple-aes/old'
+} from '@bicycle-codes/simple-aes/compat'
 ```
 
 ### `encryptMessage`

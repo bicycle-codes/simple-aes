@@ -7,7 +7,7 @@ import {
 import {
     encryptMessage as encryptOld,
     decryptMessage as decryptOld
-} from '../src/old.js'
+} from '../src/compat.js'
 
 let message:Message
 let theKey:string

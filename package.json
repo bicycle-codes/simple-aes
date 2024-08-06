@@ -9,12 +9,32 @@
     "test": "npm run build && npm run test:run",
     "test:run": "esbuild ./test/index.ts --bundle | node --input-type=module | tap-spec",
     "build-cjs": "esbuild src/*.ts --format=cjs --tsconfig=tsconfig.build.json --keep-names --outdir=./dist --out-extension:.js=.cjs",
-    "build-esm:min": "esbuild src/index.ts src/old.ts --bundle --format=esm --keep-names --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
+    "build-esm:min": "esbuild src/index.ts src/compat.ts --bundle --format=esm --keep-names --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && npm run build-esm:min && tsc --project tsconfig.build.json",
     "preversion": "npm run lint",
     "version": "auto-changelog -p --template keepachangelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md",
     "postversion": "git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./compat": {
+      "import": "./dist/compat.js",
+      "require": "./dist/compat.cjs"
+    },
+    "./*": {
+      "import": [
+        "./dist/*.js",
+        "./dist/*"
+      ],
+      "require": [
+        "./dist/*.cjs",
+        "./dist/*"
+      ]
+    }
   },
   "dependencies": {
     "@noble/ciphers": "^0.6.0",
@@ -31,26 +51,6 @@
     "eslint-config-standard": "^17.1.0",
     "tap-spec": "^5.0.0",
     "typescript": "^5.4.3"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./old": {
-      "import": "./dist/old.js",
-      "require": "./dist/old.cjs"
-    },
-    "./*": {
-      "import": [
-        "./dist/*.js",
-        "./dist/*"
-      ],
-      "require": [
-        "./dist/*.cjs",
-        "./dist/*"
-      ]
-    }
   },
   "files": [
     "./dist/*"
