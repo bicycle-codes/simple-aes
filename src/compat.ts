@@ -37,14 +37,14 @@ export async function decryptMessage (
     msg:{ content:string },
     keyString:string
 ):Promise<{ content:string }> {
-    const cypherText = normalizeBase64ToBuf(msg.content, 'base64pad')
-    // nonce should be first 16 bytes of cypher text
-    const nonce = cypherText.slice(0, 16)
-    const cypherBytes = cypherText.slice(16)  // slice -- 16 -> end
+    const cipherText = normalizeBase64ToBuf(msg.content, 'base64pad')
+    // nonce should be first 16 bytes of cipher text
+    const nonce = cipherText.slice(0, 16)
+    const cipherBytes = cipherText.slice(16)  // slice -- 16 -> end
     const aes = gcm(
         fromString(keyString, KEY_ENCODING),
         new Uint8Array(nonce)
     )
-    const decrypted = aes.decrypt(new Uint8Array(cypherBytes))
+    const decrypted = aes.decrypt(new Uint8Array(cipherBytes))
     return { content: toString(decrypted) }
 }
