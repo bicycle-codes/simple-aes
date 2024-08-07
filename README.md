@@ -32,7 +32,7 @@ import {
 
 ### `@bicycle-codes/simple-aes/compat`
 
-Use a user-land module, `@noble/ciphers`. This will work in browsers of all ages.
+Use a user-land module, [@noble/ciphers](https://github.com/paulmillr/noble-ciphers). This will work in browsers of all ages.
 
 ```js
 import {
