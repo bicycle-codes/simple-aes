@@ -55,5 +55,5 @@ test('new style can decrypt a message from old style', async t => {
 test('old module can decrypt from new module', async t => {
     const dec = await decryptOld(message, theKey)
     t.equal(dec.content, 'hello world',
-        'old module should decrupt a message created by new module')
+        'old module should decrypt a message created by new module')
 })
