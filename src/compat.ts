@@ -3,6 +3,7 @@ import { randomBytes } from '@noble/ciphers/webcrypto'
 import { fromString, toString } from 'uint8arrays'
 import { CONTENT_ENCODING, KEY_ENCODING } from './CONSTANTS.js'
 import { normalizeBase64ToBuf } from './util.js'
+export { type Message } from './types.js'
 
 /**
  * This is crypto implemented in user-land libraries,

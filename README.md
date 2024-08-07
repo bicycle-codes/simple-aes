@@ -17,6 +17,42 @@ Thanks to [Fission](https://github.com/fission-codes/), the original author for 
 npm i -S @bicycle-codes/simple-aes
 ```
 
+## use
+
+### bundler
+Just import
+
+```js
+import {
+    decryptMessage,
+    encryptMessage,
+    type Message
+} from '@bicycle-codes/simple-aes'
+// } from '@bicycle-codes/simple-aes/compat'  // for older browsers
+```
+
+### pre-bundled
+This exposes pre-bundled & minified JS files.
+
+#### copy
+
+```sh
+cp ./node_modules/@bicycle-codes/simple-aes/dist/compat.min.js ./public
+cp ./node_modules/@bicycle-codes/simple-aes/dist/index.min.js ./public/simple-aes.min.js
+```
+
+#### link
+
+```html
+<body>
+    <!-- ... -->
+
+    <script type="module" src="./compat.min.js"></script>
+    <!-- or webcrypto version -->
+    <script type="module" src="./simple-aes.min.js"></script>
+</body>
+```
+
 ## API
 
 ### `@bicycle-codes/simple-aes`
