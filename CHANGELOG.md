@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Change `iv` 16 bytes -> 12 bytes
 
-See [earthstar discussion](https://github.com/earthstar-project/earthstar/pull/356) and [stack exchange post](https://crypto.stackexchange.com/questions/41601/aes-gcm-recommended-iv-size-why-12-bytes)
+See [earthstar discussion](https://github.com/earthstar-project/earthstar/pull/356) and [stack exchange post](https://crypto.stackexchange.com/questions/41601/aes-gcm-recommended-iv-size-why-12-bytes).
 
 ## [v0.0.19](https://github.com/bicycle-codes/simple-aes/compare/v0.0.18...v0.0.19)
 
