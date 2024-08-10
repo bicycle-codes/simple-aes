@@ -22,7 +22,7 @@ export async function encryptMessage (
     msg:{ content:string }
 ):Promise<[{ content:string }, { key }]> {
     const newKey = randomBytes(32)
-    const nonce = randomBytes(16)
+    const nonce = randomBytes(12)
     const aes = gcm(newKey, nonce)
     const encryptedContent = await aes.encrypt(fromString(msg.content))
     const encryptedString = toString(
@@ -39,9 +39,9 @@ export async function decryptMessage (
     keyString:string
 ):Promise<{ content:string }> {
     const cipherText = normalizeBase64ToBuf(msg.content, 'base64pad')
-    // nonce should be first 16 bytes of cipher text
-    const nonce = cipherText.slice(0, 16)
-    const cipherBytes = cipherText.slice(16)  // slice -- 16 -> end
+    // nonce should be first 12 bytes of cipher text
+    const nonce = cipherText.slice(0, 12)
+    const cipherBytes = cipherText.slice(12)  // slice -- 12 -> end
     const aes = gcm(
         fromString(keyString, KEY_ENCODING),
         new Uint8Array(nonce)

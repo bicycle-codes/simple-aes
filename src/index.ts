@@ -108,7 +108,7 @@ async function encryptBytes (
         await importKey(key, opts) :
         key)
     const alg = opts?.alg || DEFAULT_SYMM_ALG
-    const iv = opts?.iv || randomBuf(16)
+    const iv = opts?.iv || randomBuf(12)
     const cipherBuf = await webcrypto.subtle.encrypt(
         {
             name: alg,
@@ -134,11 +134,12 @@ function joinBufs (fst:ArrayBuffer, snd:ArrayBuffer):ArrayBuffer {
     return joined.buffer
 }
 
-const InvalidMaxValue = new Error('Max must be less than 256 and greater than 0')
-
-function randomBuf (length: number, { max }: { max: number } = { max: 255 }): ArrayBuffer {
+function randomBuf (
+    length:number,
+    { max }:{ max:number } = { max: 255 }
+):ArrayBuffer {
     if (max < 1 || max > 255) {
-        throw InvalidMaxValue
+        throw new Error('Max must be less than 256 and greater than 0')
     }
 
     const arr = new Uint8Array(length)
@@ -231,8 +232,8 @@ async function decryptBytes (
     const cipherText = normalizeBase64ToBuf(msg, 'base64pad')
     const importedKey = typeof key === 'string' ? await importKey(key, opts) : key
     const alg = opts?.alg || DEFAULT_SYMM_ALG
-    const iv = cipherText.slice(0, 16)
-    const cipherBytes = cipherText.slice(16)
+    const iv = cipherText.slice(0, 12)
+    const cipherBytes = cipherText.slice(12)
     const msgBuff = await webcrypto.subtle.decrypt({
         name: alg,
         // AES-CTR uses a counter, AES-GCM/AES-CBC use an initialization vector

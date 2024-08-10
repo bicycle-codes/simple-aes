@@ -47,12 +47,14 @@ test('older browsers decrypt', async t => {
 })
 
 test('new style can decrypt a message from old style', async t => {
+    t.plan(1)
     const dec = await decryptMessage(encrypted[0], encrypted[1].key)
     t.equal(dec.content, 'hello again',
         'the new module can decrypt something encoded with old module')
 })
 
 test('old module can decrypt from new module', async t => {
+    t.plan(1)
     const dec = await decryptOld(message, theKey)
     t.equal(dec.content, 'hello world',
         'old module should decrypt a message created by new module')

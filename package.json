@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint \"./**/*.{ts,js}\"",
     "test": "npm run build && npm run test:run",
-    "test:run": "esbuild ./test/index.ts --bundle | node --input-type=module | tap-spec",
+    "test:run": "esbuild ./test/index.ts --bundle | node --input-type=module",
     "build-cjs": "esbuild src/*.ts --format=cjs --tsconfig=tsconfig.build.json --keep-names --outdir=./dist --out-extension:.js=.cjs",
     "build-esm:min": "esbuild src/index.ts src/compat.ts --bundle --format=esm --keep-names --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && npm run build-esm:min && tsc --project tsconfig.build.json",
