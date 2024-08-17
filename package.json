@@ -11,8 +11,10 @@
     "build-cjs": "esbuild src/*.ts --format=cjs --tsconfig=tsconfig.build.json --keep-names --outdir=./dist --out-extension:.js=.cjs",
     "build-esm:min": "esbuild src/index.ts src/compat.ts --bundle --format=esm --keep-names --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && npm run build-esm:min && tsc --project tsconfig.build.json",
+    "toc": "markdown-toc --maxdepth 3 -i README.md",
     "preversion": "npm run lint",
     "postversion": "git push --follow-tags && npm publish",
+    "version": "npm run toc && git add README.md",
     "prepublishOnly": "npm run build"
   },
   "exports": {
@@ -48,6 +50,7 @@
     "esbuild": "^0.23.0",
     "eslint": "^8.56.0",
     "eslint-config-standard": "^17.1.0",
+    "markdown-toc": "^1.2.0",
     "tap-spec": "^5.0.0",
     "typescript": "^5.4.3"
   },

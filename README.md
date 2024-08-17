@@ -12,6 +12,8 @@ This is generally useful as a dead simple way of working with symmetric keys in 
 
 Thanks to [Fission](https://github.com/fission-codes/), the original author for much of this code.
 
+<!-- toc -->
+
 ## install
 ```sh
 npm i -S @bicycle-codes/simple-aes
