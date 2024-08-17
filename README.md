@@ -14,6 +14,18 @@ Thanks to [Fission](https://github.com/fission-codes/), the original author for 
 
 <!-- toc -->
 
+- [install](#install)
+- [use](#use)
+  * [bundler](#bundler)
+  * [pre-bundled](#pre-bundled)
+- [API](#api)
+  * [`@bicycle-codes/simple-aes`](#bicycle-codessimple-aes)
+  * [`@bicycle-codes/simple-aes/compat`](#bicycle-codessimple-aescompat)
+  * [`encryptMessage`](#encryptmessage)
+  * [`decryptMessage`](#decryptmessage)
+
+<!-- tocstop -->
+
 ## install
 ```sh
 npm i -S @bicycle-codes/simple-aes
