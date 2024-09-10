@@ -5,8 +5,8 @@ import {
     type Message
 } from '../src/index.js'
 import {
-    encryptMessage as encryptOld,
-    decryptMessage as decryptOld
+    encryptMessage as encryptCompat,
+    decryptMessage as decryptCompat
 } from '../src/compat.js'
 
 let message:Message
@@ -30,9 +30,9 @@ test('decrypt the message', async t => {
 })
 
 let encrypted:[{ content:string }, { key }]
-test('older browsers', async t => {
+test('`compat` module', async t => {
     t.plan(2)
-    encrypted = await encryptOld({
+    encrypted = await encryptCompat({
         content: 'hello again'
     })
     t.equal(typeof encrypted[0].content, 'string', 'should encrypt a message')
@@ -41,7 +41,7 @@ test('older browsers', async t => {
 })
 
 test('older browsers decrypt', async t => {
-    const decrypted = await decryptOld(encrypted[0], encrypted[1].key)
+    const decrypted = await decryptCompat(encrypted[0], encrypted[1].key)
     t.equal(decrypted.content, 'hello again',
         'should decrypt using the `old` module')
 })
@@ -55,7 +55,7 @@ test('new style can decrypt a message from old style', async t => {
 
 test('old module can decrypt from new module', async t => {
     t.plan(1)
-    const dec = await decryptOld(message, theKey)
+    const dec = await decryptCompat(message, theKey)
     t.equal(dec.content, 'hello world',
         'old module should decrypt a message created by new module')
 })
