@@ -24,6 +24,8 @@ export async function SimpleAES () {
 
     const ciphertext = (new ArrayBuffer()).alloc(message.length + sodium.crypto_secretbox_MACBYTES)
 
+    sodium.crypto_secretbox_easy()
+
     return {
 
     }
