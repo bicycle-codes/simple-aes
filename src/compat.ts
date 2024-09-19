@@ -16,11 +16,11 @@ export { type Message } from './types.js'
  * key. Return encrypted message and key, in that order.
  *
  * @param {{ content:string }} msg The message to encrypt.
- * @returns {[{ content:string }, { key }]} The encrypted message and key.
+ * @returns {[{ content:string }, { key:string }]} The encrypted message and key.
  */
 export async function encryptMessage (
     msg:{ content:string }
-):Promise<[{ content:string }, { key }]> {
+):Promise<[{ content:string }, { key:string }]> {
     const newKey = randomBytes(32)
     const nonce = randomBytes(12)
     const aes = gcm(newKey, nonce)

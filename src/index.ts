@@ -17,7 +17,7 @@ export type { Message } from './types.js'
  * Export a given AES key, returning a string encoded as `base64url`.
  *
  * @param {CryptoKey} key The key to export.
- * @returns {string} The key, encoded as `base64url`
+ * @returns {Promise<string>} The key, encoded as `base64url`
  */
 async function exportKey (key:CryptoKey):Promise<string> {
     const buffer = await webcrypto.subtle.exportKey('raw', key)
@@ -36,14 +36,14 @@ const DEFAULT_SYMM_LEN = SymmKeyLength.B256
 
 /**
  * Take a message object, create a new AES key, and encrypt the message with the
- * key. Return encrypted message and key, in that order.
+ * key. Return encrypted message and the key, encoded as `base64url`.
  *
  * @param msg The message to encrypt.
- * @returns {[{ content:string }, { key }]} The encrypted message and key.
+ * @returns {[{ content:string }, { key:string }]} The encrypted message and key.
  */
 export async function encryptMessage (
     msg:{ content:string }
-):Promise<[{ content:string }, { key }]> {
+):Promise<[{ content:string }, { key:string }]> {
     const newKey = await createKey()
     const encryptedContent = await aesEncrypt(
         msg.content,
@@ -62,7 +62,6 @@ export async function aesEncrypt (
     alg:SymmAlg,
     iv?:Uint8Array
 ):Promise<Uint8Array> {
-    // the keystore version prefixes the `iv` into the cipher text
     const data = typeof _data === 'string' ?
         fromString(_data) :
         _data
