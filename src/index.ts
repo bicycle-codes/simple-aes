@@ -97,7 +97,7 @@ function createKey (opts?:Partial<SymmKeyOpts>):Promise<CryptoKey> {
 type CipherText = ArrayBuffer
 const DEFAULT_CTR_LEN = 64
 
-async function encryptBytes (
+export async function encryptBytes (
     msg:Msg,
     key:CryptoKey|string,
     opts?:Partial<SymmKeyOpts>
