@@ -1,5 +1,5 @@
 import { webcrypto } from 'one-webcrypto'
-import { fromString, SupportedEncodings, toString } from 'uint8arrays'
+import { fromString, type SupportedEncodings, toString } from 'uint8arrays'
 import {
     CONTENT_ENCODING,
     KEY_ENCODING,
@@ -10,7 +10,8 @@ import {
     normalizeUtf16ToBuf,
     base64ToArrBuf
 } from './util.js'
-import { Msg, SymmAlg } from './types.js'
+import type { Msg } from './types.js'
+import { SymmAlg } from './types.js'
 export type { Message } from './types.js'
 
 /**

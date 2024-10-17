@@ -1,6 +1,6 @@
 // import { KEY_ENCODING } from './CONSTANTS.js'
 import type { Msg } from './types.js'
-import { fromString, SupportedEncodings } from 'uint8arrays'
+import { fromString, type SupportedEncodings } from 'uint8arrays'
 
 enum CharSize {
     B8 = 8,
