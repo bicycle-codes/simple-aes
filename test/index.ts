@@ -2,12 +2,14 @@ import { test } from '@bicycle-codes/tapzero'
 import {
     decryptMessage,
     encryptMessage,
+    SymmKeyLength,
     type Message
 } from '../src/index.js'
 import {
     encryptMessage as encryptOld,
     decryptMessage as decryptOld
 } from '../src/compat.js'
+import { fromString } from 'uint8arrays'
 
 let message:Message
 let theKey:string
@@ -58,4 +60,22 @@ test('old module can decrypt from new module', async t => {
     const dec = await decryptOld(message, theKey)
     t.equal(dec.content, 'hello world',
         'old module should decrypt a message created by new module')
+})
+
+test('use a 128 bit key', async (t) => {
+    const [msg, { key }] = await encryptMessage({ content: 'hello 128' }, {
+        length: SymmKeyLength.B128
+    })
+
+    t.equal(typeof msg.content, 'string', 'should return encrypted content')
+    const buf = fromString(key, 'base64url')
+    t.equal(buf.length * 8, 128, 'should return a 128 bit key')
+
+    const [msg2, { key: key2 }] = await encryptOld({ content: 'hello 128' }, {
+        length: SymmKeyLength.B128
+    })
+
+    t.equal(typeof msg2.content, 'string', 'should encyrpt content')
+    const buf2 = fromString(key2, 'base64url')
+    t.equal(buf2.length * 8, 128, 'should create a 128 bit key')
 })

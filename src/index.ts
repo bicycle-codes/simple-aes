@@ -27,25 +27,29 @@ async function exportKey (key:CryptoKey):Promise<string> {
     return str
 }
 
-enum SymmKeyLength {
+export enum SymmKeyLength {
     B128 = 128,
     B192 = 192,
     B256 = 256,
 }
 
-const DEFAULT_SYMM_LEN = SymmKeyLength.B256
+export const DEFAULT_SYMM_LEN = SymmKeyLength.B256
 
 /**
  * Take a message object, create a new AES key, and encrypt the message with the
  * key. Return encrypted message and the key, encoded as `base64url`.
  *
  * @param msg The message to encrypt.
- * @returns {[{ content:string }, { key:string }]} The encrypted message and key.
+ * @returns {Promise<[
+ *   { content:string },
+ *   { key:string }
+ * ]>} The encrypted message and key.
  */
 export async function encryptMessage (
-    msg:{ content:string }
+    msg:{ content:string },
+    opts:{ length:SymmKeyLength } = { length: DEFAULT_SYMM_LEN }
 ):Promise<[{ content:string }, { key:string }]> {
-    const newKey = await createKey()
+    const newKey = await createKey({ length: opts.length })
     const encryptedContent = await aesEncrypt(
         msg.content,
         newKey,
@@ -84,6 +88,9 @@ type SymmKeyOpts = {
     iv:ArrayBuffer
 }
 
+/**
+ * @TODO -- can pass in key size
+ */
 function createKey (opts?:Partial<SymmKeyOpts>):Promise<CryptoKey> {
     return webcrypto.subtle.generateKey(
         {

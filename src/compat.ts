@@ -3,6 +3,7 @@ import { randomBytes } from '@noble/ciphers/webcrypto'
 import { fromString, toString } from 'uint8arrays'
 import { CONTENT_ENCODING, KEY_ENCODING } from './CONSTANTS.js'
 import { normalizeBase64ToBuf } from './util.js'
+import { DEFAULT_SYMM_LEN, type SymmKeyLength } from './index.js'
 export { type Message } from './types.js'
 
 /**
@@ -19,9 +20,10 @@ export { type Message } from './types.js'
  * @returns {[{ content:string }, { key:string }]} The encrypted message and key.
  */
 export async function encryptMessage (
-    msg:{ content:string }
+    msg:{ content:string },
+    opts:{ length:SymmKeyLength } = { length: DEFAULT_SYMM_LEN }
 ):Promise<[{ content:string }, { key:string }]> {
-    const newKey = randomBytes(32)
+    const newKey = randomBytes(opts.length / 8)  // bits to bytes conversion
     const nonce = randomBytes(12)
     const aes = gcm(newKey, nonce)
     const encryptedContent = await aes.encrypt(fromString(msg.content))
