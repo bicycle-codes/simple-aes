@@ -70,7 +70,8 @@ cp ./node_modules/@bicycle-codes/simple-aes/dist/index.min.js ./public/simple-ae
 ## API
 
 ### `@bicycle-codes/simple-aes`
-Use the `webcrypto` API. This will only work in newer browsers.
+
+Use the `webcrypto` API.
 
 ```js
 import {
@@ -96,18 +97,28 @@ Generate a new AES key and encrypt the given message object.
 Return an array of `[ encryptedMessage, { key }]`,
 where `key` is a new AES key, encoded as `base64url`.
 
+Can pass in a size for the key. By default it uses 256 bits.
+
 ```ts
 async function encryptMessage (
-    msg:{ content:string }
-):Promise<[{ content:string }, { key }]>
+    msg:{ content:string },
+    opts:{ length:SymmKeyLength } = { length: DEFAULT_SYMM_LEN }
+):Promise<[{ content:string }, { key:string }]>
 ```
 
 #### encrypt example
 ```ts
-import { encryptMessage } from '@bicycle-codes/simple-aes'
+import { SymmKeyLength, encryptMessage } from '@bicycle-codes/simple-aes'
 
 const [encryptedMsg, { key }] = await encryptMessage({
     content: 'hello world'
+})
+
+// or pass in a key size
+await encryptMessage({
+    content: 'hello'
+}, {
+    length: SymmKeyLength.B128
 })
 
 console.log(encryptedMessage)
