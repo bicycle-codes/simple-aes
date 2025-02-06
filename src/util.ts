@@ -1,4 +1,3 @@
-// import { KEY_ENCODING } from './CONSTANTS.js'
 import type { Msg } from './types.js'
 import { fromString, type SupportedEncodings } from 'uint8arrays'
 

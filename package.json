@@ -64,7 +64,6 @@
     "test": "test"
   },
   "author": "nichoth <nichoth@nichoth.com> (https://nichoth.com)",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bicycle-codes/simple-aes.git"
@@ -81,5 +80,6 @@
   "bugs": {
     "url": "https://github.com/bicycle-codes/simple-aes/issues"
   },
+  "license": "SEE LICENSE IN LICENSE",
   "homepage": "https://github.com/bicycle-codes/simple-aes"
 }
